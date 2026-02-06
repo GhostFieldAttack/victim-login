@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Login</title>
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="glass-card">
+        <p class="subtitle">Please login to continue</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Please enter your username" required
+                    autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Please enter your password" required
+                    autocomplete="current-password">
+            </div>
+
+            <button type="submit" id="Submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();  // stops the default action of the form
+            const btn = document.getElementById('Submit');
+            btn.textContent = 'Submitting...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                window.location.href = 'case.html';
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>

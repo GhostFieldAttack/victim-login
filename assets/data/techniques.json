@@ -1,0 +1,21 @@
+[
+  {
+    "case_id": "fake.input_hidden",
+    "techniques_id": "T01",
+    "technique": "input hidden fake field",
+    "category": "fake",
+    "fake_mode": "spoof",
+    "page_path": "cases/input_hidden.html",
+    "tags": ["hidden"],
+    "notes": "Use input hidden field; user cannot see it."
+  },
+  {
+    "case_id": "fake.tiny_size",
+    "techniques_id": "T01",
+    "technique": "Tiny size hidden fake field",
+    "category": "fake",
+    "fake_mode": "inject",
+    "page_path": "cases/fake_tiny_size.html",
+    "tags": ["css", "hidden", "tiny-size"]
+  }
+]
