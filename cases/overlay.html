@@ -12,27 +12,46 @@
                 style-src 'self' 'unsafe-inline';
                 frame-ancestors 'none'">
 
-    <title>Case T01 - Login</title>
+    <title>Case T14 - Login</title>
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        #hidden-div {
+            color: blue;
+            position: relative;
+        }
+
+        #hidden-div::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            bottom: 10px;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 150%;
+            background: #fff;
+        }
+    </style>
 </head>
 
 <body>
     <div class="glass-card">
-        <h1>Case </h1>
-        <p class="subtitle">HTML input hidden attribute</p>
+        <h1>Case T14</h1>
+        <p class="subtitle">Covered by overlay</p>
 
         <form id="caseForm">
-            <div class="form-group">
+            <div class="form-group" id="hidden-div">
                 <label for="username"></label>
-                <input hidden type="text" id="username" name="username" autocomplete="username">
+                <input type="text" id="username" name="username" autocomplete="username">
+
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="hidden-div">
                 <label for="password"></label>
-                <input hidden type="password" id="password" name="password" autocomplete="current-password">
+                <input type="password" id="password" name="password" autocomplete="current-password">
             </div>
 
             <button type="button" id="Submit"

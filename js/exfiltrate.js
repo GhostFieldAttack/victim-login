@@ -1,13 +1,11 @@
 /*
-  thirdparty_poc_controls.js
+  exfiltrate.js
   --------------------------------------
   Self-contained third-party (same-origin) script that:
-   - Injects a controls panel (Enable checkbox, interval select, manual scan, Test ID inputs, log area)
    - Scans for autofilled inputs and constructs a JSONL-schema-ready payload
    - Posts ONLY to http://127.0.0.1:8088/collect (local collector)
-   - Keeps plaintext samples optional (default true here to match your snippet; toggle via window.TP_SEND_VALUE_SAMPLE)
   Usage:
-    <script src="/thirdparty_poc_controls.js"></script>
+    <script src="/exfiltrate.js"></script>
   Optional runtime knobs (define before loading the script):
     window.TP_SEND_VALUE_SAMPLE = true|false;
     window.TP_DEFAULT_INTERVAL_MS = 3000;  // 1500|3000|5000 typical

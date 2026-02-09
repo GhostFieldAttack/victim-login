@@ -1,3 +1,8 @@
+/*
+  load_technique.js
+  --------------------------------------
+  Load technique from techniques.json and inject data-tech/technique into the UI container
+*/
 (function () {
     const JSON_PATH = '../assets/data/techniques.json';
 

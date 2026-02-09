@@ -12,7 +12,7 @@
                 style-src 'self' 'unsafe-inline';
                 frame-ancestors 'none'">
 
-    <title>Case T01 - Login</title>
+    <title>Case T04 - Login</title>
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,18 +21,18 @@
 
 <body>
     <div class="glass-card">
-        <h1>Case </h1>
-        <p class="subtitle">HTML input hidden attribute</p>
+        <h1>Case T03</h1>
+        <p class="subtitle">CSS visibility:hidden</p>
 
         <form id="caseForm">
             <div class="form-group">
                 <label for="username"></label>
-                <input hidden type="text" id="username" name="username" autocomplete="username">
+                <input type="text" id="username" name="username" autocomplete="username" style="visibility: hidden;">
             </div>
 
             <div class="form-group">
                 <label for="password"></label>
-                <input hidden type="password" id="password" name="password" autocomplete="current-password">
+                <input type="password" id="password" name="password" autocomplete="current-password" style="visibility: hidden;">
             </div>
 
             <button type="button" id="Submit"
