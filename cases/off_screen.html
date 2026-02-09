@@ -12,7 +12,7 @@
                 style-src 'self' 'unsafe-inline';
                 frame-ancestors 'none'">
 
-    <title>Case T13 - Login</title>
+    <title>Case T15 - Login</title>
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,20 +21,20 @@
 
 <body>
     <div class="glass-card">
-        <h1>Case T12</h1>
-        <p class="subtitle">CSS tiny size (1x1)</p>
+        <h1>Case T15</h1>
+        <p class="subtitle">Off screen</p>
 
         <form id="caseForm">
             <div class="form-group">
                 <label for="username"></label>
                 <input type="text" id="username" name="username" autocomplete="username"
-                    style="width: 1px; height: 1px; padding: 0;">
+                    style="position: absolute; left: -9999px">
             </div>
 
             <div class="form-group">
                 <label for="password"></label>
                 <input type="password" id="password" name="password" autocomplete="current-password"
-                    style="width: 1px; height: 1px; padding: 0;">
+                    style="position: absolute; left: -9999px">
             </div>
 
             <button type="button" id="Submit"

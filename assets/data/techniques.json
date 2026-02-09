@@ -7,7 +7,7 @@
     "category": "fake",
     "fake_mode": "spoof",
     "page_path": "cases/input_hidden.html",
-    "tags": ["hidden", "html_input_hidden"],
+    "tags": ["hidden", "html", "input_hidden"],
     "notes": "Use input hidden field; user cannot see it."
   },
   {
@@ -16,9 +16,9 @@
     "technique": "form hidden",
     "field": "form",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/form_hidden.html",
-    "tags": ["hidden", "html_form_hidden"],
+    "tags": ["hidden", "html", "form_hidden"],
     "notes": "Use form hidden field; user cannot see it."
   },
   {
@@ -27,9 +27,9 @@
     "technique": "display:none",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/display_none.html",
-    "tags": ["hidden", "css_display_none"],
+    "tags": ["hidden", "css", "display_none"],
     "notes": "Use css display:none; user cannot see it."
   },
   {
@@ -38,9 +38,9 @@
     "technique": "visibility:hidden",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/visibility_hidden.html",
-    "tags": ["hidden", "css_visibility_hidden"],
+    "tags": ["hidden", "css", "visibility_hidden"],
     "notes": "Use css visibility:hidden; user cannot see it."
   },
   {
@@ -49,9 +49,9 @@
     "technique": "visibility:collapse",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/visibility_collapse.html",
-    "tags": ["hidden", "css_visibility_collapse"],
+    "tags": ["hidden", "css", "visibility_collapse"],
     "notes": "Use css visibility:collapse; user cannot see it."
   },
   {
@@ -60,9 +60,9 @@
     "technique": "opacity:0",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/opacity_0.html",
-    "tags": ["hidden", "css_opacity_0"],
+    "tags": ["hidden", "css", "opacity_0"],
     "notes": "Use css opacity:0; user cannot see it."
   },
   {
@@ -71,9 +71,9 @@
     "technique": "filter:opacity(0)",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/filter_opacity(0).html",
-    "tags": ["hidden", "css_filter_opacity(0)"],
+    "tags": ["hidden", "css", "filter_opacity(0)"],
     "notes": "Use css filter:opacity(0); user cannot see it."
   },
   {
@@ -82,9 +82,9 @@
     "technique": "clip:rect(0, 0, 0, 0)",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/clip_rect.html",
-    "tags": ["hidden", "css_clip_rect"],
+    "tags": ["hidden", "css", "clip_rect"],
     "notes": "Use css clip:rect(0, 0, 0, 0); user cannot see it."
   },
   {
@@ -93,9 +93,9 @@
     "technique": "clip-path:inset(0 0 100% 0)",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/clip_path_inset.html",
-    "tags": ["hidden", "css_clip_path_inset"],
+    "tags": ["hidden", "css", "clip_path_inset"],
     "notes": "Use css clip-path:inset(0 0 100% 0); user cannot see it."
   },
   {
@@ -104,9 +104,9 @@
     "technique": "transform:scale(0)",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/transform_scale(0).html",
-    "tags": ["hidden", "css_transform_scale(0)"],
+    "tags": ["hidden", "css", "transform_scale(0)"],
     "notes": "Use css transform:scale(0); user cannot see it."
   },
   {
@@ -115,42 +115,64 @@
     "technique": "font-size:0",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/font_size_0.html",
-    "tags": ["hidden", "css_font_size_0"],
+    "tags": ["hidden", "css", "font_size_0"],
     "notes": "Use css font-size:0 and height:0; user cannot see it."
   },
   {
     "case_id": "fake.content_visibility_hidden",
     "techniques_id": "T12",
     "technique": "content-visibility:hidden",
-    "field": "input",
+    "field": "div",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/content_visibility_hidden.html",
-    "tags": ["hidden", "css_content_visibility_hidden"],
+    "tags": ["hidden", "css", "content_visibility_hidden"],
     "notes": "Use css content-visibility:hidden; user cannot see it."
   },
   {
     "case_id": "fake.tiny_size",
     "techniques_id": "T13",
-    "technique": "tiny size (1×1)",
+    "technique": "tiny size (1x1)",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
+    "fake_mode": "spoof",
     "page_path": "cases/tiny_size.html",
-    "tags": ["hidden", "css_tiny_size"],
-    "notes": "Use css tiny size (1×1); user cannot see it."
+    "tags": ["hidden", "css", "tiny_size"],
+    "notes": "Use css tiny size (1x1); user cannot see it."
   },
   {
     "case_id": "fake.overlay",
     "techniques_id": "T14",
     "technique": "overlay",
+    "field": "div",
+    "category": "fake",
+    "fake_mode": "spoof",
+    "page_path": "cases/overlay.html",
+    "tags": ["hidden", "css", "overlay"],
+    "notes": "cover by overlay; user cannot see it."
+  },
+  {
+    "case_id": "fake.off_screen",
+    "techniques_id": "T15",
+    "technique": "off screen",
     "field": "input",
     "category": "fake",
-    "fake_mode": "inject",
-    "page_path": "cases/overlay.html",
-    "tags": ["hidden", "overlay"],
-    "notes": "cover by overlay; user cannot see it."
+    "fake_mode": "spoof",
+    "page_path": "cases/off_screen.html",
+    "tags": ["hidden", "css", "off_screen"],
+    "notes": "Use css left: -9999px; user cannot see it."
+  },
+  {
+    "case_id": "fake.input_overflow",
+    "techniques_id": "T16",
+    "technique": "input overflow",
+    "field": "input",
+    "category": "fake",
+    "fake_mode": "spoof",
+    "page_path": "cases/input_overflow.html",
+    "tags": ["hidden", "css", "input_overflow"],
+    "notes": "Use css overflow: hidden; user cannot see it."
   }
 ]
