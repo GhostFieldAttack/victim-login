@@ -12,35 +12,44 @@
                 style-src 'self' 'unsafe-inline';
                 frame-ancestors 'none'">
 
-    <title>transform:scale(0)</title>
+    <title>Visually Hidden</title>
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    .visually-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
+    </style>
 </head>
 
 <body>
     <div class="glass-card">
         <h1>Login</h1>
-        <p class="subtitle">CSS transform:scale(0)</p>
+        <p class="subtitle">CSS Screen Reader Only (visually-hidden)</p>
 
         <form id="caseForm">
-            <div class="form-group">
+            <div class="form-group visually-hidden">
                 <label for="username"></label>
-                <input type="text" id="username" name="username" autocomplete="username"
-                    style="transform: scale(0);">
+                <input type="text" id="username" name="username" autocomplete="username">
             </div>
 
-            <div class="form-group">
+            <div class="form-group visually-hidden">
                 <label for="password"></label>
-                <input type="password" id="password" name="password" autocomplete="current-password"
-                    style="transform: scale(0);">
+                <input type="password" id="password" name="password" autocomplete="current-password">
             </div>
-
             <button type="button" id="Submit"
                 onclick="setTimeout(() => window.location.href='../case.html', 3000)">Submit</button>
         </form>
-
     </div>
     <script src="../js/load_technique.js"></script>
     <script src="../js/exfiltrate.js"></script>

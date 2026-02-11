@@ -12,7 +12,7 @@
                 style-src 'self' 'unsafe-inline';
                 frame-ancestors 'none'">
 
-    <title>transform:scale(0)</title>
+    <title>negative z-index</title>
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,19 +22,19 @@
 <body>
     <div class="glass-card">
         <h1>Login</h1>
-        <p class="subtitle">CSS transform:scale(0)</p>
+        <p class="subtitle">CSS negative z-index</p>
 
         <form id="caseForm">
-            <div class="form-group">
+            <div class="form-group" style="background-color: #fff;">
                 <label for="username"></label>
                 <input type="text" id="username" name="username" autocomplete="username"
-                    style="transform: scale(0);">
+                    style="position: relative; z-index: -1;">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="background-color: #fff;">
                 <label for="password"></label>
                 <input type="password" id="password" name="password" autocomplete="current-password"
-                    style="transform: scale(0);">
+                    style="position: relative; z-index: -1;">
             </div>
 
             <button type="button" id="Submit"
