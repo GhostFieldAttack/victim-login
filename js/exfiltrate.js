@@ -31,7 +31,7 @@
 
   (document.body ? Promise.resolve() : new Promise(r => addEventListener('DOMContentLoaded', r))).then(() => {
     if (!window.TEST_ID) window.TEST_ID = DEFAULT_TEST_ID;
-    log('PoC loaded (Background mode) — start the collector on 127.0.0.1:8088.');
+    log('PoC loaded (Background mode)');
     log('Current Test ID: ' + window.TEST_ID);
   });
 
@@ -150,14 +150,14 @@
         timestamp,
         local_ts,
         case_id: caseId,
-        scenario: 'same-origin',
+        scenario: 'in-html',
         browser: uaInfo.browser,
         // pm: window.PWD_MANAGER || 'unknown',
         input_type: f.inputType || null,
         technique: f.tech || null,
         value: SEND_VALUE_SAMPLE ? redactValue(f.value) : null
       };
-      log(`Found field ${payload.input_type} (technique=${payload.technique}) — sending`);
+      log(`Found field ${payload.input_type} (case id = ${payload.case_id}) — sending`);
       await safePostLocal(payload);
     }
   }
