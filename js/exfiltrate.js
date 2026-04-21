@@ -72,31 +72,21 @@
     return {
       ts: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
       local_ts: getLocalTs(),
-      seq: ++LOG_SEQ,
-      source: 'exfiltrate.js',
-      session_id: SESSION_ID,
-      test_id: window.TEST_ID || DEFAULT_TEST_ID,
+      event: '',
       case_id: window.CASE_ID || '',
       scenario: 'in-html',
-      browser: uaInfo.browser,
-      page: location.href
+      browser: uaInfo.browser
     };
   }
 
-  function emit(level, event, extra = {}) {
+  function emit(event, extra = {}) {
     const entry = {
       ...baseLogFields(),
-      level,
       event,
       ...extra
     };
 
-    // 單行 JSON，方便 Playwright / grep / jq / JSONL
-    const line = JSON.stringify(entry);
-
-    if (level === 'error') console.error(line);
-    else if (level === 'warn') console.warn(line);
-    else console.log(line);
+    console.log(JSON.stringify(entry));
   }
 
   // -----------------------------
@@ -184,8 +174,7 @@
       payload_meta: {
         case_id: envelope.case_id,
         input_type: envelope.input_type,
-        technique: envelope.technique,
-        has_value: envelope.value !== null && envelope.value !== ''
+        technique: envelope.technique
       }
     });
 
@@ -202,15 +191,13 @@
       if (!res.ok) {
         emit('error', 'collector_response_error', {
           status: res.status,
-          status_text: res.statusText,
           response_text: text || ''
         });
         return { ok: false, status: res.status, text };
       }
 
       emit('info', 'collector_response_ok', {
-        status: res.status,
-        response_text: text || ''
+        status: res.status
       });
       return { ok: true, status: res.status, text };
     } catch (e) {
@@ -299,9 +286,6 @@
     if (!window.TEST_ID) window.TEST_ID = DEFAULT_TEST_ID;
 
     emit('info', 'bootstrap', {
-      mode: 'background',
-      collector: LOCAL_COLLECTOR,
-      send_value_sample: SEND_VALUE_SAMPLE,
       default_interval_ms: DEFAULT_INTERVAL
     });
   });
