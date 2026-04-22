@@ -28,7 +28,7 @@
   const DEFAULT_TEST_ID = (function () {
     if (window.TEST_ID) return window.TEST_ID;
     const ymd = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    return 'thirdParty_sameOrigin_' + ymd;
+    return 'in-html_' + ymd;
   })();
 
   const SESSION_ID = (crypto?.randomUUID?.() || `sess_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
