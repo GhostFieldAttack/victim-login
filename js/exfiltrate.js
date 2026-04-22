@@ -187,6 +187,7 @@
     const uaInfo = parseUserAgent();
     const caseId = window.CASE_ID || '';
     const scenario = window.SCENARIO || 'in-html';
+    const pmName = window.__PM_NAME__ || 'unknownpm';
 
     for (const f of found) {
       try { f.node.dataset.exfiltrated = '1'; } catch (e) {}
@@ -210,6 +211,7 @@
         local_ts,
         case_id: caseId,
         scenario,
+        pm_name: pmName,
         browser: uaInfo.browser,
         input_type: f.inputType || null,
         technique: f.tech || null,
