@@ -67,7 +67,12 @@
 
   function log(msg) {
     const t = new Date().toLocaleTimeString('en-US', { hour12: false });
-    console.log(`[PoC][${t}] ${msg}`);
+    const line = `[PoC][${t}] ${msg}`;
+
+    console.log(line);
+
+    window.__pocLogs = window.__pocLogs || [];
+    window.__pocLogs.push(line);
   }
 
   // -----------------------------
