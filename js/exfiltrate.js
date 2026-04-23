@@ -31,8 +31,6 @@
     return 'in-html_' + ymd;
   })();
 
-  const SESSION_ID = (crypto?.randomUUID?.() || `sess_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
-  let LOG_SEQ = 0;
   let timer = null;
 
   // -----------------------------
